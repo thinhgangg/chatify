@@ -1,0 +1,27 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background circle -->
+  <circle cx="100" cy="100" r="100" fill="#16A34A"/>
+
+  <!-- Chat bubble (main) -->
+  <path d="M52 62
+           C52 53.163 59.163 46 68 46
+           H132
+           C140.837 46 148 53.163 148 62
+           V114
+           C148 122.837 140.837 130 132 130
+           H92
+           L68 152
+           V130
+           H68
+           C59.163 130 52 122.837 52 114
+           Z"
+        fill="#FFFFFF"/>
+
+  <!-- Small accent bubble (bottom right, teal accent) -->
+  <circle cx="148" cy="148" r="18" fill="#5EEAD4"/>
+
+  <!-- Dots inside main bubble representing "typing" -->
+  <circle cx="80" cy="88" r="7" fill="#16A34A"/>
+  <circle cx="100" cy="88" r="7" fill="#16A34A"/>
+  <circle cx="120" cy="88" r="7" fill="#16A34A"/>
+</svg>

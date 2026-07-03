@@ -1,0 +1,65 @@
+<svg width="800" height="1000" viewBox="0 0 800 1000" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="1000" fill="#16A34A"/>
+
+  <!-- Decorative soft circles (flat, no gradient) -->
+  <circle cx="680" cy="120" r="140" fill="#15803D" opacity="0.5"/>
+  <circle cx="80" cy="880" r="180" fill="#22C55E" opacity="0.4"/>
+  <circle cx="650" cy="850" r="90" fill="#5EEAD4" opacity="0.25"/>
+
+  <!-- Large chat bubble (sent) -->
+  <g transform="translate(150,320)">
+    <path d="M0 24
+             C0 10.745 10.745 0 24 0
+             H336
+             C349.255 0 360 10.745 360 24
+             V150
+             C360 163.255 349.255 174 336 174
+             H60
+             L20 210
+             V174
+             H24
+             C10.745 174 0 163.255 0 150
+             Z"
+          fill="#FFFFFF"/>
+    <rect x="36" y="40" width="220" height="18" rx="9" fill="#16A34A" opacity="0.85"/>
+    <rect x="36" y="72" width="288" height="18" rx="9" fill="#16A34A" opacity="0.6"/>
+    <rect x="36" y="104" width="160" height="18" rx="9" fill="#16A34A" opacity="0.4"/>
+  </g>
+
+  <!-- Small chat bubble (received) -->
+  <g transform="translate(300,560)">
+    <path d="M300 24
+             C300 10.745 289.255 0 276 0
+             H24
+             C10.745 0 0 10.745 0 24
+             V110
+             C0 123.255 10.745 134 24 134
+             H240
+             L280 164
+             V134
+             H276
+             C289.255 134 300 123.255 300 110
+             Z"
+          fill="#5EEAD4"/>
+    <rect x="30" y="36" width="180" height="16" rx="8" fill="#065F46"/>
+    <rect x="30" y="64" width="120" height="16" rx="8" fill="#065F46" opacity="0.7"/>
+  </g>
+
+  <!-- Avatar circles floating -->
+  <circle cx="120" cy="180" r="34" fill="#FFFFFF"/>
+  <circle cx="120" cy="180" r="34" fill="none" stroke="#065F46" stroke-width="0" />
+  <circle cx="120" cy="180" r="14" fill="#16A34A" cy2="0"/>
+
+  <circle cx="640" cy="480" r="28" fill="#FFFFFF" opacity="0.9"/>
+  <circle cx="640" cy="480" r="11" fill="#16A34A"/>
+
+  <!-- Online status dots -->
+  <circle cx="140" cy="200" r="8" fill="#4ADE80" stroke="#16A34A" stroke-width="3"/>
+
+  <!-- Bottom text placeholder -->
+  <g transform="translate(150,820)">
+    <rect x="0" y="0" width="380" height="28" rx="6" fill="#FFFFFF"/>
+    <rect x="0" y="44" width="280" height="18" rx="6" fill="#FFFFFF" opacity="0.75"/>
+  </g>
+</svg>
