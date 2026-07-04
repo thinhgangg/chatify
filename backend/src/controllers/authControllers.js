@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import crypto from "crypto";
 import Session from "../models/Session.js";
 
-const ACCESS_TOKEN_TTL = "30s"; // Access token time to live
+const ACCESS_TOKEN_TTL = "30m"; // Access token time to live
 const REFRESH_TOKEN_TTL = 7 * 24 * 60 * 60 * 1000; // Refresh token time to live
 
 export const signUp = async (req, res) => {
@@ -34,7 +34,7 @@ export const signUp = async (req, res) => {
       displayName: `${firstname} ${lastname}`,
     });
 
-    return res.sendStatus(204);
+    return res.status(201).json({ message: "User created successfully" });
   } catch (error) {
     console.error("Error occurred while signing up user:", error);
     return res.status(500).json({ message: "Internal server error" });
@@ -112,7 +112,7 @@ export const signOut = async (req, res) => {
       res.clearCookie("refreshToken");
     }
 
-    return res.sendStatus(204);
+    return res.status(200).json({ message: "Sign out successful" });
   } catch (error) {
     console.error("Error occurred while signing out user:", error);
     return res.status(500).json({ message: "Internal server error" });
