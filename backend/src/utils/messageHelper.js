@@ -19,8 +19,8 @@ export const updateConversationAfterMessage = (
 
     const isSender = memberId === senderId.toString();
 
-    const unreadCount = conversation.unreadCount.get(memberId) || 0;
+    const unreadCounts = conversation.unreadCounts.get(memberId) || 0;
 
-    conversation.unreadCount.set(memberId, isSender ? 0 : unreadCount + 1);
+    conversation.unreadCounts.set(memberId, isSender ? 0 : unreadCounts + 1);
   });
 };
