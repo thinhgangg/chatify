@@ -142,3 +142,16 @@ export const getMessages = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
+export const getConversationsForSocket = async (userId) => {
+  try {
+    const conversations = await Conversation.find(
+      { "participants.userId": userId },
+      { _id: 1 },
+    );
+    return conversations.map((convo) => convo._id.toString());
+  } catch (error) {
+    console.error("Error fetching conversations for socket:", error);
+    return [];
+  }
+};

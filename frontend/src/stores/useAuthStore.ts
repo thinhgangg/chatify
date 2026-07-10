@@ -116,8 +116,6 @@ export const useAuthStore = create<AuthState>()(
         } catch (error) {
           console.error(error);
           get().clearState();
-
-          toast.error("Session expired. Please log in again.");
         } finally {
           set({ loading: false });
         }

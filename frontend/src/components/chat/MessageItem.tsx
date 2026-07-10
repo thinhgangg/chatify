@@ -2,8 +2,6 @@ import { cn, formatMessageTime } from "@/lib/utils";
 import type { Conversation, Message, Participant } from "@/types/chat";
 import UserAvatar from "./UserAvatar";
 import { Card } from "../ui/card";
-import { Badge } from "../ui/badge";
-
 interface MessageItemProps {
   message: Message;
   index: number;
@@ -32,69 +30,75 @@ const MessageItem = ({
     (p: Participant) => p._id.toString() === message.senderId.toString(),
   );
 
+  const lastOwnMessage = [...messages].reverse().find((m) => m.isOwn);
+
+  const isLastOwnMessage = message._id === lastOwnMessage?._id;
+
   return (
-    <div
-      className={cn(
-        "flex gap-2 message-bounce",
-        message.isOwn ? "justify-end" : "justify-start",
-      )}
-    >
-      {/* avatar */}
-      {!message.isOwn && (
-        <div className="w-8 ">
-          {isGroupBreak && (
-            <UserAvatar
-              type="chat"
-              name={participant?.displayName ?? ""}
-              avatarUrl={participant?.avatarUrl ?? undefined}
-            />
-          )}
+    <>
+      {isGroupBreak && (
+        <div className="my-4 flex justify-center">
+          <span className="rounded-full bg-muted px-3 py-1 text-xs text-muted-foreground">
+            {formatMessageTime(new Date(message.createdAt))}
+          </span>
         </div>
       )}
 
-      {/* message content */}
       <div
         className={cn(
-          "max-w-xs lg:max-w-md space-y-1 flex flex-col",
-          message.isOwn ? "items-end" : "items-start",
+          "flex gap-2 message-bounce mt-1",
+          message.isOwn ? "justify-end" : "justify-start",
         )}
       >
-        <Card
+        {/* avatar */}
+        {!message.isOwn && (
+          <div className="w-8 ">
+            {isGroupBreak && (
+              <UserAvatar
+                type="chat"
+                name={participant?.displayName ?? ""}
+                avatarUrl={participant?.avatarUrl ?? undefined}
+              />
+            )}
+          </div>
+        )}
+
+        {/* message content */}
+        <div
           className={cn(
-            "p-3",
-            message.isOwn
-              ? "bg-chat-bubble-sent border-0"
-              : "bg-chat-bubble-received",
+            "max-w-xs lg:max-w-md space-y-1 flex flex-col",
+            message.isOwn ? "items-end" : "items-start",
           )}
         >
-          <p className="text-sm leading-relaxed wrap-break-word">
-            {message.content}
-          </p>
-        </Card>
-
-        {/* time */}
-        {isGroupBreak && (
-          <span className="text-xs text-muted-foreground px-1">
-            {formatMessageTime(new Date(message.createdAt))}
-          </span>
-        )}
-
-        {/* status */}
-        {message.isOwn && message._id === selectedConvo.lastMessage?._id && (
-          <Badge
-            variant="outline"
+          <Card
             className={cn(
-              "text-xs px-1.5 py-0.5 h-4 border-0",
-              lastMessageStatus === "seen"
-                ? "bg-primary/20 text-primary"
-                : "bg-muted text-muted-foreground",
+              "p-3",
+              message.isOwn
+                ? "bg-chat-bubble-sent border-0"
+                : "bg-chat-bubble-received",
             )}
           >
-            {lastMessageStatus}
-          </Badge>
-        )}
+            <p className="text-sm leading-relaxed wrap-break-word">
+              {message.content}
+            </p>
+          </Card>
+
+          {/* {isGroupBreak && (
+            <span className="text-xs text-muted-foreground">
+              {formatMessageTime(new Date(message.createdAt))}
+            </span>
+          )} */}
+
+          {/* status */}
+          {isLastOwnMessage && (
+            <span className="mt-1 px-1 text-[11px]">
+              {lastMessageStatus === "delivered" && "Delivered"}
+              {lastMessageStatus === "seen" && "Seen"}
+            </span>
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

@@ -1,3 +1,4 @@
+import type { Socket } from "socket.io-client";
 import type { Conversation, Message } from "./chat";
 import type { User } from "./user";
 
@@ -52,4 +53,27 @@ export interface ChatState {
   fetchConversations: () => Promise<void>;
 
   fetchMessages: (conversationId?: string) => Promise<void>;
+
+  sendDirectMessage: (
+    recipientId: string,
+    content: string,
+    imgUrl?: string,
+  ) => Promise<void>;
+
+  sendGroupMessage: (
+    conversationId: string,
+    content: string,
+    imgUrl?: string,
+  ) => Promise<void>;
+
+  addMessage: (message: Message) => Promise<void>;
+
+  updateConversation: (conversation: Conversation) => void;
+}
+
+export interface SocketState {
+  socket: Socket | null;
+  onlineUsers: string[];
+  connectSocket: () => void;
+  disconnectSocket: () => void;
 }

@@ -4,7 +4,7 @@ import FriendRequest from "../models/FriendRequest.js";
 
 export const sendFriendRequest = async (req, res) => {
   try {
-    const { to, message } = req.body;
+    const { to } = req.body;
 
     const from = req.user._id;
 
@@ -44,7 +44,7 @@ export const sendFriendRequest = async (req, res) => {
       return res.status(400).json({ message: "Friend request already exists" });
     }
 
-    const request = await FriendRequest.create({ from, to, message });
+    const request = await FriendRequest.create({ from, to });
 
     return res.status(201).json({ message: "Friend request sent", request });
   } catch (error) {

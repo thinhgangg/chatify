@@ -3,12 +3,14 @@ import ChatCard from "./ChatCard";
 import { useAuthStore } from "@/stores/useAuthStore";
 import { useChatStore } from "@/stores/useChatStore";
 import { cn } from "@/lib/utils";
-import UserAvatar from "./userAvatar";
+import UserAvatar from "./UserAvatar";
 import StatusBadge from "./StatusBadge";
 import UnreadCountBadge from "./UnreadCountBadge";
+import { useSocketStore } from "@/stores/useSocketStore";
 
 const DirectMessageCard = ({ convo }: { convo: Conversation }) => {
   const { user } = useAuthStore();
+  const { onlineUsers } = useSocketStore();
   const {
     activeConversationId,
     setActiveConversation,
@@ -52,7 +54,11 @@ const DirectMessageCard = ({ convo }: { convo: Conversation }) => {
           />
 
           {/* socket io */}
-          <StatusBadge status="offline" />
+          <StatusBadge
+            status={
+              onlineUsers.includes(otherUser?._id || "") ? "online" : "offline"
+            }
+          />
 
           {unreadCounts > 0 && <UnreadCountBadge unreadCounts={unreadCounts} />}
         </>

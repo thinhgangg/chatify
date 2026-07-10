@@ -16,6 +16,7 @@ export const useChatStore = create<ChatState>()(
       setActiveConversation: (conversationId) => {
         set({ activeConversationId: conversationId });
       },
+
       reset: () => {
         set({
           conversations: [],
@@ -86,6 +87,91 @@ export const useChatStore = create<ChatState>()(
         } finally {
           set({ messageLoading: false });
         }
+      },
+
+      sendDirectMessage: async (recipientId, content, imgUrl) => {
+        try {
+          const { activeConversationId } = get();
+          await chatService.sendDirectMessage(
+            recipientId,
+            content,
+            imgUrl,
+            activeConversationId || undefined,
+          );
+
+          set((state) => ({
+            conversations: state.conversations.map((convo) =>
+              convo._id === activeConversationId
+                ? { ...convo, seenBy: [] }
+                : convo,
+            ),
+          }));
+        } catch (error) {
+          console.error("Failed to send direct message:", error);
+        }
+      },
+
+      sendGroupMessage: async (conversationId, content, imgUrl) => {
+        try {
+          await chatService.sendGroupMessage(conversationId, content, imgUrl);
+
+          set((state) => ({
+            conversations: state.conversations.map((convo) =>
+              convo._id === get().activeConversationId
+                ? { ...convo, seenBy: [] }
+                : convo,
+            ),
+          }));
+        } catch (error) {
+          console.error("Failed to send group message:", error);
+        }
+      },
+
+      addMessage: async (message) => {
+        try {
+          const { user } = useAuthStore.getState();
+          const { fetchMessages } = get();
+
+          message.isOwn = message.senderId === user?._id;
+
+          const convoId = message.conversationId;
+
+          let prevItems = get().messages[convoId]?.items ?? [];
+
+          if (prevItems.length === 0) {
+            await fetchMessages(message.conversationId);
+            prevItems = get().messages[convoId]?.items ?? [];
+          }
+
+          set((state) => {
+            if (prevItems.some((msg) => msg._id === message._id)) {
+              return state;
+            }
+
+            return {
+              messages: {
+                ...state.messages,
+                [convoId]: {
+                  items: [...prevItems, message],
+                  hasMore: state.messages[convoId]?.hasMore ?? true,
+                  nextCursor: state.messages[convoId]?.nextCursor ?? undefined,
+                },
+              },
+            };
+          });
+        } catch (error) {
+          console.error("Failed to add message:", error);
+        }
+      },
+
+      updateConversation: (conversation) => {
+        set((state) => ({
+          conversations: state.conversations.map((convo) =>
+            convo._id === conversation._id
+              ? { ...convo, ...conversation }
+              : convo,
+          ),
+        }));
       },
     }),
     {
