@@ -23,7 +23,7 @@ const DirectMessageCard = ({ convo }: { convo: Conversation }) => {
   const otherUser = convo.participants.find((p) => p._id !== user._id);
   if (!otherUser) return null;
 
-  const unreadCounts = convo.unreadCount?.[user._id] ?? 0;
+  const unreadCounts = convo.unreadCounts?.[user._id] ?? 0;
   const lastMessage = convo.lastMessage?.content ?? "";
 
   const handleSelectConversation = async (id: string) => {

@@ -40,7 +40,7 @@ export const useSocketStore = create<SocketState>((set, get) => ({
         content: conversation.lastMessage.content,
         createdAt: conversation.lastMessage.createdAt,
         sender: {
-          _id: conversation.lastMessage.sender._id,
+          _id: conversation.lastMessage.senderId,
           displayName: "",
           avatarUrl: null,
         },
@@ -55,10 +55,23 @@ export const useSocketStore = create<SocketState>((set, get) => ({
       if (
         useChatStore.getState().activeConversationId === message.conversationId
       ) {
-        // If the user is currently viewing the conversation, mark the message as read
+        useChatStore.getState().markAsSeen();
       }
 
       useChatStore.getState().updateConversation(updatedConversation);
+    });
+
+    // read message
+    socket.on("read-message", ({ conversation, lastMessage }) => {
+      const updated = {
+        _id: conversation._id,
+        lastMessage,
+        lastMessageAt: conversation.lastMessageAt,
+        seenBy: conversation.seenBy,
+        unreadCounts: conversation.unreadCounts,
+      };
+
+      useChatStore.getState().updateConversation(updated);
     });
   },
 

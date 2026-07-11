@@ -17,7 +17,7 @@ const GroupChatCard = ({ convo }: { convo: Conversation }) => {
 
   if (!user) return null;
 
-  const unreadCounts = convo.unreadCount?.[user._id] ?? 0;
+  const unreadCounts = convo.unreadCounts?.[user._id] ?? 0;
   const name = (() => {
     const groupName = convo.group?.[0]?.name?.trim();
 

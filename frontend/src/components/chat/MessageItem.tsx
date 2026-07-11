@@ -17,7 +17,7 @@ const MessageItem = ({
   selectedConvo,
   lastMessageStatus,
 }: MessageItemProps) => {
-  const prev = messages[index - 1];
+  const prev = index + 1 < messages.length ? messages[index + 1] : undefined;
 
   const isGroupBreak =
     index === 0 ||
@@ -36,14 +36,6 @@ const MessageItem = ({
 
   return (
     <>
-      {isGroupBreak && (
-        <div className="my-4 flex justify-center">
-          <span className="rounded-full bg-muted px-3 py-1 text-xs text-muted-foreground">
-            {formatMessageTime(new Date(message.createdAt))}
-          </span>
-        </div>
-      )}
-
       <div
         className={cn(
           "flex gap-2 message-bounce mt-1",
@@ -83,12 +75,6 @@ const MessageItem = ({
             </p>
           </Card>
 
-          {/* {isGroupBreak && (
-            <span className="text-xs text-muted-foreground">
-              {formatMessageTime(new Date(message.createdAt))}
-            </span>
-          )} */}
-
           {/* status */}
           {isLastOwnMessage && (
             <span className="mt-1 px-1 text-[11px]">
@@ -98,6 +84,14 @@ const MessageItem = ({
           )}
         </div>
       </div>
+
+      {isGroupBreak && (
+        <div className="my-4 flex justify-center">
+          <span className="rounded-full bg-muted px-3 py-1 text-xs text-muted-foreground">
+            {formatMessageTime(new Date(message.createdAt))}
+          </span>
+        </div>
+      )}
     </>
   );
 };
