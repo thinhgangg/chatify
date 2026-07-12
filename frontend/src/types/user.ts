@@ -18,8 +18,19 @@ export interface Friend {
 }
 
 export interface FriendRequest {
-  id: string;
-  username: string;
-  displayName: string;
-  avatarUrl?: string;
+  _id: string;
+  from?: {
+    _id: string;
+    username: string;
+    displayName: string;
+    avatarUrl?: string;
+  };
+  to?: {
+    _id: string;
+    username: string;
+    displayName: string;
+    avatarUrl?: string;
+  };
+  createdAt: string;
+  updatedAt: string;
 }
