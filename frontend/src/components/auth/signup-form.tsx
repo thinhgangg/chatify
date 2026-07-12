@@ -81,9 +81,7 @@ export function SignupForm({
                     placeholder="John"
                   />
                   {errors.firstname && (
-                    <p className="text-sm text-destructive">
-                      {errors.firstname.message}
-                    </p>
+                    <p className="error-message">{errors.firstname.message}</p>
                   )}
                 </div>
 
@@ -101,9 +99,7 @@ export function SignupForm({
                     placeholder="Doe"
                   />
                   {errors.lastname && (
-                    <p className="text-sm text-destructive">
-                      {errors.lastname.message}
-                    </p>
+                    <p className="error-message">{errors.lastname.message}</p>
                   )}
                 </div>
               </div>
@@ -124,9 +120,7 @@ export function SignupForm({
                     placeholder="john_doe"
                   />
                   {errors.username && (
-                    <p className="text-sm text-destructive">
-                      {errors.username.message}
-                    </p>
+                    <p className="error-message">{errors.username.message}</p>
                   )}
                 </div>
               </div>
@@ -144,9 +138,7 @@ export function SignupForm({
                     placeholder="john.doe@example.com"
                   />
                   {errors.email && (
-                    <p className="text-sm text-destructive">
-                      {errors.email.message}
-                    </p>
+                    <p className="error-message">{errors.email.message}</p>
                   )}
                 </div>
               </div>
@@ -167,9 +159,7 @@ export function SignupForm({
                     placeholder="••••••••"
                   />
                   {errors.password && (
-                    <p className="text-sm text-destructive">
-                      {errors.password.message}
-                    </p>
+                    <p className="error-message">{errors.password.message}</p>
                   )}
                 </div>
               </div>

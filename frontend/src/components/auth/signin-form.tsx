@@ -39,7 +39,7 @@ export function SignInForm({
     const { username, password } = data;
 
     await signIn(username, password);
-    
+
     navigate("/");
   };
 
@@ -77,9 +77,7 @@ export function SignInForm({
                     placeholder="john_doe"
                   />
                   {errors.username && (
-                    <p className="text-sm text-destructive">
-                      {errors.username.message}
-                    </p>
+                    <p className="error-message">{errors.username.message}</p>
                   )}
                 </div>
               </div>
@@ -100,9 +98,7 @@ export function SignInForm({
                     placeholder="••••••••"
                   />
                   {errors.password && (
-                    <p className="text-sm text-destructive">
-                      {errors.password.message}
-                    </p>
+                    <p className="error-message">{errors.password.message}</p>
                   )}
                 </div>
               </div>

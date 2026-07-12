@@ -7,8 +7,10 @@ export const sendFriendRequest = async (req, res) => {
     const { to } = req.body;
 
     const from = req.user._id;
+    const fromId = from.toString();
+    const toId = to?.toString();
 
-    if (from === to) {
+    if (fromId === toId) {
       return res
         .status(400)
         .json({ message: "You cannot send a friend request to yourself" });
@@ -19,8 +21,8 @@ export const sendFriendRequest = async (req, res) => {
       return res.status(404).json({ message: "User not found" });
     }
 
-    let userA = from.toString();
-    let userB = to.toString();
+    let userA = fromId;
+    let userB = toId;
 
     if (userA > userB) {
       [userA, userB] = [userB, userA];
