@@ -1,10 +1,10 @@
 import type { Participant } from "@/types/chat";
-import UserAvatar from "./userAvatar";
+import UserAvatar from "./UserAvatar";
 import { Ellipsis } from "lucide-react";
 
 interface GroupChatAvatarProps {
   participants: Participant[];
-  type: "siderbar" | "chat";
+  type: "sidebar" | "chat";
 }
 
 const GroupChatAvatar = ({ participants, type }: GroupChatAvatarProps) => {

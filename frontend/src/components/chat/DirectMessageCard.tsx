@@ -48,7 +48,7 @@ const DirectMessageCard = ({ convo }: { convo: Conversation }) => {
       leftSection={
         <>
           <UserAvatar
-            type="siderbar"
+            type="sidebar"
             name={otherUser.displayName ?? ""}
             avatarUrl={otherUser.avatarUrl ?? undefined}
           />

@@ -48,7 +48,7 @@ const ChatWindowHeader = ({ chat }: { chat?: Conversation }) => {
             {chat.type === "direct" ? (
               <>
                 <UserAvatar
-                  type={"siderbar"}
+                  type={"sidebar"}
                   name={otherUser?.displayName || ""}
                   avatarUrl={otherUser?.avatarUrl || undefined}
                 />
@@ -65,7 +65,7 @@ const ChatWindowHeader = ({ chat }: { chat?: Conversation }) => {
             ) : (
               <GroupChatAvatar
                 participants={chat.participants}
-                type="siderbar"
+                type="sidebar"
               />
             )}
           </div>

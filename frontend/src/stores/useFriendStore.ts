@@ -2,7 +2,8 @@ import { friendService } from "@/services/friendService";
 import type { FriendState } from "@/types/store";
 import { create } from "zustand";
 
-export const useFriendStore = create<FriendState>((set, get) => ({
+export const useFriendStore = create<FriendState>((set) => ({
+  friends: [],
   loading: false,
   receivedList: [],
   sentList: [],
@@ -77,6 +78,19 @@ export const useFriendStore = create<FriendState>((set, get) => ({
       }));
     } catch (error) {
       console.error("Error declining friend request:", error);
+    } finally {
+      set({ loading: false });
+    }
+  },
+
+  getAllFriends: async () => {
+    try {
+      set({ loading: true });
+      const friends = await friendService.getAllFriends();
+      set({ friends: friends ?? [] });
+    } catch (error) {
+      console.error("Error fetching friends:", error);
+      set({ friends: [] });
     } finally {
       set({ loading: false });
     }

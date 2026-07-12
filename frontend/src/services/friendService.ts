@@ -7,7 +7,7 @@ export const friendService = {
   },
 
   async sendFriendRequest(to: string) {
-    const res = await api.post(`/friends/request`, { to });
+    const res = await api.post(`/friends/requests`, { to });
     return res.data.message;
   },
 
@@ -36,5 +36,10 @@ export const friendService = {
     } catch (error) {
       console.error("Error declining friend request:", error);
     }
+  },
+
+  async getAllFriends() {
+    const res = await api.get(`/friends`);
+    return res.data.friends ?? [];
   },
 };

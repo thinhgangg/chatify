@@ -62,9 +62,21 @@ export const createConversation = async (req, res) => {
       { path: "lastMessage.senderId", select: "displayName avatarUrl" },
     ]);
 
+    const participants = (conversation.participants || []).map((p) => ({
+      _id: p.userId?._id,
+      displayName: p.userId?.displayName,
+      avatarUrl: p.userId?.avatarUrl ?? null,
+      joinedAt: p.joinedAt,
+    }));
+
+    const formatted = {
+      ...conversation.toObject(),
+      participants,
+    };
+
     return res
       .status(201)
-      .json({ message: "Conversation created", conversation });
+      .json({ message: "Conversation created", conversation: formatted });
   } catch (error) {
     console.error("Error creating conversation:", error);
     res.status(500).json({ message: error.message });
