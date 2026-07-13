@@ -181,7 +181,7 @@
 
   /* Chat bubble variants */
   .chat-bubble-sent {
-    @apply bg-primary/80! text-[hsl(var(--chat-bubble-sent-foreground))]! shadow-[var(--shadow-bubble)];
+    @apply bg-primary/80! text-[hsl(var(--chat-bubble-sent-foreground))]! shadow-(--shadow-bubble);
   }
 
   .chat-bubble-received {
@@ -256,7 +256,7 @@
 
   .pulse-ring::before {
     content: "";
-    @apply absolute inset-0 rounded-full bg-primary/30 animate-ping duration-[2000ms];
+    @apply absolute inset-0 rounded-full bg-primary/30 animate-ping duration-2000;
   }
 
   /* Message bounce in animation */
