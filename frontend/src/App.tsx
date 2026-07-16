@@ -33,7 +33,6 @@ function App() {
         <Routes>
           {/* public routes */}
           <Route path="/signin" element={<SignInPage />} />
-
           <Route path="/signup" element={<SignUpPage />} />
 
           {/* protected routes */}
