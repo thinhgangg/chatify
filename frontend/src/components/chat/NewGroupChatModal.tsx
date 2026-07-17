@@ -73,10 +73,14 @@ const NewGroupChatModal = () => {
   return (
     <Dialog>
       <DialogTrigger asChild>
-        <div className="flex justify-center items-center size-5 rounded-full hover:bg-sidebar-accent cursor-pointer z-10">
-          <Users className="size-4" onClick={handleGetFriends} />
+        <Button
+          variant="ghost"
+          onClick={handleGetFriends}
+          className="flex z-10 justify-center items-center size-5 rounded-full hover:bg-sidebar-accent cursor-pointer"
+        >
+          <Users className="size-4" />
           <span className="sr-only">New Group Chat</span>
-        </div>
+        </Button>
       </DialogTrigger>
 
       <DialogContent className="sm:max-w-100 border-none">
