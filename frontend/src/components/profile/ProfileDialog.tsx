@@ -1,5 +1,5 @@
 import type { Dispatch, SetStateAction } from "react";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "../ui/dialog";
+import { Dialog, DialogContent } from "../ui/dialog";
 import ProfileCard from "./ProfileCard";
 import { useAuthStore } from "@/stores/useAuthStore";
 
@@ -15,7 +15,6 @@ const ProfileDialog = ({ open, setOpen }: ProfileDialogProps) => {
       <DialogContent className="overflow-y-auto p-0 bg-transparent border-0 shadow-2xl">
         <div>
           <div className="max-w-4xl mx-auto p-4">
-            {/* heading */}
             <div className="mb-6">
               <h1 className="text-2xl font-bold text-foreground">
                 Profile & Settings
