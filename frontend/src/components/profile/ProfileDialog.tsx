@@ -16,7 +16,7 @@ const ProfileDialog = ({ open, setOpen }: ProfileDialogProps) => {
         <div>
           <div className="max-w-4xl mx-auto p-4">
             <div className="mb-6">
-              {/* header */}
+            
               <h1 className="text-2xl font-bold text-foreground">
                 Profile & Settings
               </h1>
