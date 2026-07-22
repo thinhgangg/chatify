@@ -20,6 +20,7 @@ export const useUserStore = create<UserState>(() => ({
 
         await fetchMe();
         useChatStore.getState().fetchConversations();
+        toast.success("Avatar updated successfully!");
       }
     } catch (error) {
       console.error("Error updating avatar:", error);
