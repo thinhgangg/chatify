@@ -23,6 +23,10 @@ export const useAuthStore = create<AuthState>()(
         sessionStorage.clear();
       },
 
+      setUser: (user) => {
+        set({ user });
+      },
+
       signUp: async (username, password, email, firstname, lastname) => {
         try {
           set({ loading: true });

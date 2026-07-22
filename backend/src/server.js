@@ -12,6 +12,7 @@ import cors from "cors";
 import swaggerUi from "swagger-ui-express";
 import fs from "fs";
 import { app, server } from "./socket/index.js";
+import { v2 as cloudinary } from "cloudinary";
 
 dotenv.config();
 
@@ -27,6 +28,13 @@ app.use(
     credentials: true,
   }),
 );
+
+// cloudinary configuration
+cloudinary.config({
+  cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+  api_key: process.env.CLOUDINARY_API_KEY,
+  api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 // swagger setup
 const swaggerDocument = JSON.parse(

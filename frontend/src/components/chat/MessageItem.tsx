@@ -30,7 +30,7 @@ const MessageItem = ({
     (p: Participant) => p._id.toString() === message.senderId.toString(),
   );
 
-  const lastOwnMessage = [...messages].reverse().find((m) => m.isOwn);
+  const lastOwnMessage = messages.find((m) => m.isOwn);
 
   const isLastOwnMessage = message._id === lastOwnMessage?._id;
 

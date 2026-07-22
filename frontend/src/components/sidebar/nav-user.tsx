@@ -1,6 +1,5 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -22,6 +21,7 @@ import Logout from "../auth/logout";
 import { useState } from "react";
 import FriendRequestDialog from "../friendRequest/FriendRequestDialog";
 import ProfileDialog from "../profile/ProfileDialog";
+import UserAvatar from "../chat/UserAvatar";
 
 export function NavUser({ user }: { user: User }) {
   const { isMobile } = useSidebar();
@@ -38,12 +38,12 @@ export function NavUser({ user }: { user: User }) {
                 size="lg"
                 className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
               >
-                <Avatar className="h-8 w-8 rounded-lg">
-                  <AvatarImage src={user.avatarUrl} alt={user.displayName} />
-                  <AvatarFallback className="rounded-lg">
-                    {user.displayName.charAt(0)}
-                  </AvatarFallback>
-                </Avatar>
+                <UserAvatar
+                  type="sidebar"
+                  name={user.displayName}
+                  avatarUrl={user.avatarUrl}
+                  className="h-8 w-8 rounded-lg"
+                />
                 <div className="grid flex-1 text-left text-sm leading-tight">
                   <span className="truncate font-medium">
                     {user.displayName}
@@ -61,12 +61,12 @@ export function NavUser({ user }: { user: User }) {
             >
               <DropdownMenuLabel className="p-0 font-normal">
                 <div className="flex items-center gap-2 px-1 py-1.5 text-left text-sm">
-                  <Avatar className="h-8 w-8 rounded-lg">
-                    <AvatarImage src={user.avatarUrl} alt={user.displayName} />
-                    <AvatarFallback className="rounded-lg">
-                      {user.displayName.charAt(0)}
-                    </AvatarFallback>
-                  </Avatar>
+                  <UserAvatar
+                    type="sidebar"
+                    name={user.displayName}
+                    avatarUrl={user.avatarUrl}
+                    className="h-8 w-8 rounded-lg"
+                  />
                   <div className="grid flex-1 text-left text-sm leading-tight">
                     <span className="truncate font-medium">
                       {user.displayName}

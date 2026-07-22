@@ -4,16 +4,14 @@ import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
 interface IUserAvatarProps {
   type: "sidebar" | "chat" | "profile";
   name: string;
-  avatarUrl?: string;
+  avatarUrl?: string | null;
   className?: string;
 }
 
 const userAvatar = ({ type, name, avatarUrl, className }: IUserAvatarProps) => {
-  const bgColor = !avatarUrl ? "bg-primary" : "";
-
-  if (!name) {
-    name = "User";
-  }
+  const safeName = name?.trim() ? name : "User";
+  const imageSrc = avatarUrl?.trim() ? avatarUrl : undefined;
+  const bgColor = !imageSrc ? "bg-primary" : "";
 
   return (
     <Avatar
@@ -25,9 +23,9 @@ const userAvatar = ({ type, name, avatarUrl, className }: IUserAvatarProps) => {
         type === "profile" && "size-24 text-3xl shadow-md",
       )}
     >
-      <AvatarImage src={avatarUrl} alt={name} />
+      <AvatarImage key={imageSrc ?? "fallback"} src={imageSrc} alt={safeName} />
       <AvatarFallback className={`${bgColor} text-white font-semibold`}>
-        {name.charAt(0).toUpperCase()}
+        {safeName.charAt(0).toUpperCase()}
       </AvatarFallback>
     </Avatar>
   );
