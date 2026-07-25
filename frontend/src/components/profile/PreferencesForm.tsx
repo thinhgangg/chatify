@@ -14,7 +14,7 @@ import { useState } from "react";
 const PreferencesForm = () => {
   const { isDark, toggleTheme } = useThemeStore();
 
-  //   Handle logic setOnlineStatus
+  //   handle logic setOnlineStatus
   const [onlineStatus, setOnlineStatus] = useState(false);
 
   return (
